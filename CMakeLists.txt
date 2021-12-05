@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 FIND_PACKAGE(Boost COMPONENTS program_options REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
+find_package(Libevent CONFIG REQUIRED)
+
 if (WIN32)
     add_definitions(-DNOMINMAX -DWIN32_LEAN_AND_MEAN)
 endif()
@@ -20,7 +22,7 @@ add_executable(stomperd
     src/server.cpp
     src/output.cpp)
 
-target_link_libraries(stomperd PRIVATE event ${Boost_LIBRARIES})
+target_link_libraries(stomperd PRIVATE libevent::core ${Boost_LIBRARIES})
 
 if (WIN32)
     target_link_libraries(stomperd PRIVATE ws2_32)
