@@ -33,10 +33,10 @@ bool startup::parse(int argc, char *argv[])
         return false;
     }
 
-    if (vm.count("config"))
-        config_ = vm["config"].as<path_type>();
-    else
-        throw std::runtime_error("no config");
+//    if (vm.count("config"))
+//        config_ = vm["config"].as<path_type>();
+//    else
+//        throw std::runtime_error("no config");
 
     return true;
 }

@@ -19,6 +19,16 @@ public:
     startup() = default;
 
     bool parse(int argc, char *argv[]);
+
+    const std::string& listen() const noexcept
+    {
+        return listen_;
+    }
+
+    int port() const noexcept
+    {
+        return port_;
+    }
 };
 
 } // namespace stomperd

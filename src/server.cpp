@@ -35,11 +35,11 @@ server::server(const startup& startup)
 {
     create();
 
-//    btpro::sock_addr addr(btpro::ipv4::any(61613));
-//    addr.assign(argv[1]);
+    btpro::sock_addr addr(btpro::ipv4::any(startup.port()));
+    addr.assign(startup.listen());
 
-//    acceptor4_.listen(queue_,
-//        LEV_OPT_REUSEABLE_PORT|LEV_OPT_DEFERRED_ACCEPT, addr);
+    acceptor4_.listen(queue_,
+        LEV_OPT_REUSEABLE_PORT|LEV_OPT_DEFERRED_ACCEPT, addr);
 }
 
 void server::run()
