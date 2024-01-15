@@ -4,3 +4,9 @@
 [submodule "btpro"]
 	path = btpro
 	url = https://github.com/ikonopistsev/btpro.git
+[submodule "e4pp"]
+	path = e4pp
+	url = https://github.com/ikonopistsev/e4pp.git
+[submodule "libmdbx"]
+	path = libmdbx
+	url = https://github.com/erthink/libmdbx.git

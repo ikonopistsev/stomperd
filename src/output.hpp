@@ -1,39 +1,35 @@
 #pragma once
 
-#include <iostream>
+#include "e4pp/util.hpp"
 
 namespace stomperd {
 
-class output
+extern e4pp::util::output u;
+
+inline std::ostream& cerr() noexcept
 {
-    std::size_t verbose_ = { 0u };
-    std::ostream& log_time(std::ostream& output);
+    return u.cerr();
+}
 
-public:
-    output() = default;
+inline std::ostream& cout() noexcept
+{
+    return u.cout();
+}
 
-    void set(std::size_t verbose);
+template<class F>
+void do_trace(F fn) noexcept
+{
+    u.do_trace(std::move(fn));
+}
 
-    std::ostream& cerr()
-    {
-        return log_time(std::cerr);
-    }
+template<class F>
+void trace(F fn) noexcept
+{
+    u.trace(std::move(fn));
+}
 
-    std::ostream& cout()
-    {
-        return log_time(std::cout);
-    }
+struct sock_addr_arg;
 
-    template<class F>
-    std::ostream& cout(F fn)
-    {
-        if (verbose_)
-            return cout() << fn();
-
-        return std::cout;
-    }
-};
+std::string to_string(const sock_addr_arg& val);
 
 } // namespace stomperd
-
-extern stomperd::output j;

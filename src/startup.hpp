@@ -2,33 +2,21 @@
 
 #include <filesystem>
 #include <string>
+#include <vector>
 
 namespace stomperd {
 
-class startup
+using fs_path = std::filesystem::path;
+
+struct startup
 {
-public:
-    using path_type = std::filesystem::path;
-
-private:
-    path_type config_{};
-    std::string listen_{};
-    int port_{};
-
-public:
-    startup() = default;
+    fs_path config{};
+    std::size_t verbose{};
+    std::string listen{};
+    int port{};
+    bool timestamps{};
 
     bool parse(int argc, char *argv[]);
-
-    const std::string& listen() const noexcept
-    {
-        return listen_;
-    }
-
-    int port() const noexcept
-    {
-        return port_;
-    }
 };
 
 } // namespace stomperd

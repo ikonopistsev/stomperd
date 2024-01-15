@@ -3,6 +3,7 @@
 #include "boost/program_options.hpp"
 #include <string_view>
 #include <iostream>
+#include <vector>
 
 using namespace stomperd;
 
@@ -14,13 +15,16 @@ bool startup::parse(int argc, char *argv[])
     po::options_description desc("stomperd options");
     desc.add_options()
         ("help,h", "show help message")
-        ("listen,l", po::value<std::string>(&listen_)->default_value("0.0.0.0"),
+        ("listen,l", po::value<std::string>(&listen)->default_value("0.0.0.0"),
             "listening address")
-        ("port,p", po::value<int>(&port_)->default_value(61613),
+        ("port,p", po::value<int>(&port)->default_value(61613),
             "listening port")
-        ("config,c", po::value<path_type>(), "config path")
-        ("pid,f", po::value<path_type>(), "pid path")
-        ("journal,j", po::value<path_type>(), "journal path")
+        ("config,c", po::value<fs_path>(), "config path")
+        ("pid,f", po::value<fs_path>(), "pid path")
+        ("verbose,v", po::value<std::size_t>(&verbose)->default_value(0),
+            "verbose output")
+        ("timestamps,t", po::bool_switch(&timestamps)->default_value(false), "use timestamps")
+        ("journal,j", po::value<fs_path>(), "journal path")
     ;
 
     po::variables_map vm;
